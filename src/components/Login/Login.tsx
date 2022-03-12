@@ -1,31 +1,28 @@
 import React, {useState} from 'react';
-import {Form, Input, Button, Checkbox} from 'antd';
+import {message , Form, Input, Button, Checkbox} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import styled from 'styled-components';
 import Wrapper from '../Wrapper';
 import {RuleObject, StoreValue} from 'rc-field-form/lib/interface';
+import axios from '../../config/axios';
 
-
-type State = {
-  account: string,
-  password: string
-}
 type Validator = (rule: RuleObject, value: StoreValue, callback: (error?: string) => void) => Promise<void | any> | void;
 
 const Login: React.FC = () => {
-  const [state, setState] = useState<State>({account: '', password: ''});
-  const onSubmit = () => {
-
-  };
   const onFinish = (values: any) => {
     console.log('Success:', values);
-
+    axios.post('sign_in/user' ,{
+      account: values.username,
+      password: values.password
+    } ).then(()=>{message.success('登录成功',2.5)} ,
+      ()=>{message.error('登录失败, 请重试' , 2.5)})
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+
   };
+
   const validatorUsername:Validator = (rule,value , callback) =>{
     if(!value){return Promise.reject('用户名不能为空') }
     if (/\W/.test(value)) {return Promise.reject('用户名只能是字母数者下划线')}
@@ -34,7 +31,7 @@ const Login: React.FC = () => {
   }
   return (
     <Wrapper>
-      <h1 className={'title'}>番茄闹钟登陆</h1>
+      <h1 className={'title'}>番茄闹钟登录</h1>
       <Form
         name="basic"
         onFinish={onFinish}
@@ -55,7 +52,7 @@ const Login: React.FC = () => {
 
         <Form.Item >
           <Button type="primary" htmlType="submit">
-            登陆
+            登录
           </Button>
         </Form.Item>
       </Form>
