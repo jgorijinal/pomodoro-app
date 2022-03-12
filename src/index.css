@@ -19,4 +19,7 @@ code {
 *::after , *::before {
   box-sizing: border-box;
 }
+li , ul {
+  list-style: none;
+}
 
