@@ -1,27 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'antd';
+import {Link, HashRouter as Router, Switch, Route} from 'react-router-dom';
+import Login from './components/Login/Login';
+import Index from './components/Index';
+import SignUp from './components/SingUp/SignUp';
+import NoMatch from './components/NoMatch/NoMatch';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button type={'primary'}>button</Button>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/signUp">
+            <SignUp/>
+          </Route>
+          <Route path="/">
+            <Index/>
+          </Route>
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
