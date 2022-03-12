@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {message , Form, Input, Button, Checkbox} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Wrapper from '../Wrapper';
 import {RuleObject, StoreValue} from 'rc-field-form/lib/interface';
 import axios from '../../config/axios';
@@ -9,18 +9,22 @@ import axios from '../../config/axios';
 type Validator = (rule: RuleObject, value: StoreValue, callback: (error?: string) => void) => Promise<void | any> | void;
 
 const Login: React.FC = () => {
+  const history = useHistory()
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
     axios.post('sign_in/user' ,{
       account: values.username,
       password: values.password
-    } ).then(()=>{message.success('登录成功',2.5)} ,
+    } ).then(()=>{
+      message.success('登录成功',2.5)
+      history.push('/')
+      } ,
       ()=>{message.error('登录失败, 请重试' , 2.5)})
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
-
   };
 
   const validatorUsername:Validator = (rule,value , callback) =>{

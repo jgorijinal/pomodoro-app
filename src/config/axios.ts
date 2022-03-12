@@ -31,7 +31,11 @@ instance.interceptors.response.use(function (response) {
   }
   return response;
 }, function (error) {
-  // Do something with response error
+  console.log('响应拦截器')
+  if(error.response.status === 401){
+    console.log('重定向')
+    window.location.href = '/#login'
+  }
   return Promise.reject(error);
 });
 
