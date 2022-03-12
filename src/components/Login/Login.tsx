@@ -20,7 +20,9 @@ const Login: React.FC = () => {
       message.success('登录成功',2.5)
       history.push('/')
       } ,
-      ()=>{message.error('登录失败, 请重试' , 2.5)})
+      (e)=>{
+      console.log(e.response)
+      message.error(e.response.data.errors+',请重试' , 2.5)})
   };
 
   const onFinishFailed = (errorInfo: any) => {

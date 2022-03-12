@@ -20,8 +20,8 @@ const SignUp: React.FC = () => {
     }).then(() => {
         message.success('注册成功', 3)
         history.push('/login');},
-      () => {message.warn('账户名已存在,请重试', 3); });
-
+      () => {
+      message.warn('用户名已存在, 请重试', 3); });
   };
 
   const onFinishFailed = (errorInfo: any) => {
