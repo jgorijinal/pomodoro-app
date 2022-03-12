@@ -3,6 +3,7 @@ import {Button, message} from 'antd';
 import {Link, useHistory} from 'react-router-dom';
 import axios from '../../config/axios';
 import Header from './Header'
+import Todos from '../Todos/Todos';
 type State = {
   user: any
 }
@@ -33,6 +34,9 @@ const Index: React.FC = () => {
   return (
     <div>
       <Header username={state.user.account} />
+      <main>
+        <Todos />
+      </main>
     </div>
   );
 };
