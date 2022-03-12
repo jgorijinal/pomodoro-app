@@ -11,7 +11,6 @@ const instance = axios.create({
   }
 });
 
-// Add a request interceptor
 instance.interceptors.request.use(function (config) {
   const xToken = localStorage.getItem('x-token')
   if(config.headers && xToken){
@@ -23,19 +22,13 @@ instance.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-// Add a response interceptor
 instance.interceptors.response.use(function (response) {
-  // Do something with response data
   if(response.headers['x-token']){
     localStorage.setItem('x-token',response.headers['x-token'])
   }
   return response;
 }, function (error) {
   console.log('响应拦截器')
-  if(error.response.status === 401){
-    console.log('重定向')
-    window.location.href = '/#login'
-  }
   return Promise.reject(error);
 });
 

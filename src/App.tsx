@@ -8,7 +8,7 @@ import NoMatch from './components/NoMatch/NoMatch';
 
 function App() {
   return (
-    <Router>
+    <Router >
       <div>
         <Switch>
           <Route path="/login">
@@ -17,7 +17,7 @@ function App() {
           <Route path="/signUp">
             <SignUp/>
           </Route>
-          <Route path="/">
+          <Route path="/" >
             <Index/>
           </Route>
           <Route path="*">

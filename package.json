@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@types/react-router-dom": "5.1.2",
     "@types/styled-components": "5.0.1",
     "node-sass": "npm:dart-sass@1.25.0"
