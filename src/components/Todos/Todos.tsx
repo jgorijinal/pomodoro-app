@@ -34,6 +34,22 @@ const Todos: React.FC = () => {
       console.log(e)
     }
   }
+  const updateTodo =  async (id:number , params:any)=> {
+    try {
+      const response = await axios.put(`todos/${id}` , params )
+      console.log(response.data.resource)
+      const newTodoList = todoList.map (t=> {      //这时候用 map
+        if(t.id === id ){
+          return response.data.resource
+        }else {
+          return t
+        }
+      })
+      setTodoList([...newTodoList])
+    }catch (e){
+      console.log(e)
+    }
+  }
  useEffect(()=>{
     getTodos()         //第一次挂载时获取列表
    console.log('第一次挂载')
@@ -46,7 +62,7 @@ const Todos: React.FC = () => {
     <TodoWrapper>
       <TodoInput addTodo={addTodo}/>
       <div>
-          {todoList.map( t => <TodoItem key={t.id} {...t}  /> )}
+          {todoList.map( t => <TodoItem  key={t.id} {...t}  updateTodo={updateTodo}  /> )}
       </div>
     </TodoWrapper>
   );
